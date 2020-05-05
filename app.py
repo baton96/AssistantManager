@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, session, redirect, url_for, f
 #from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from flask_seeder import FlaskSeeder
+from flask_migrate import Migrate
 from flask_caching import Cache
 from PIL import Image
 import requests
@@ -16,8 +17,9 @@ app.config['CACHE_DEFAULT_TIMEOUT'] = '300'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['CACHE_TYPE'] = 'simple'
 
-db = SQLAlchemy(app)
 cache = Cache(app)
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 seeder = FlaskSeeder(app, db)
 departments = {'IT', 'Managment', 'HR', 'PR'}
 
