@@ -37,6 +37,9 @@ def getJobs():
     return jobs
 
 @app.route('/')
+def default():
+    return redirect(url_for('index'))
+
 @app.route('/assistants/')
 def index():
     assistants = db.session.query(Assistant).all()
@@ -53,7 +56,7 @@ def index():
             key=lambda assistant: getattr(assistant, sortBy),
             reverse=desc)
 
-    return render_template('index.html',   # TODO indexView name
+    return render_template('index.html',
                            assistants=assistants,
                            departments=departments)
 
