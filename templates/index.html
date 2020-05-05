@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Assistant Manager</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+	<div id="search">
+		<h2 id="searchHeader">Assistant Manager App</h2>
+		<span><p>
+			This app was created to help managing assistants. 
+			Below you can choose multiple criteria.
+		</p></span>
+	</div>
+	<div id="assistants">
+	{% for assistant in assistants %}
+		<a href="{{ assistant['id'] }}">
+			<div class="assistant">
+				<span class="imgSpan">
+					<img src="../uploads/{{ assistant['id'] }}.jpg">
+				</span>
+				<span class="descrb">
+					{{ assistant['name'] or 'No name'}}<br>					
+					{{ assistant['department'] or 'No department' }}<br>
+					{{ assistant['job'] or 'No job' }}
+				</span>			
+			</div>
+		</a>
+	{% endfor %}
+	</div>
+	<form>
+	<span id="sort">
+		<span>Departments:</span>
+		{% for department in departments %}
+		<span>
+			<input 
+				type="checkbox" 
+				name="{{ department }}" 
+				{% if department in request.args %} checked {% endif %}>{{ department }}
+		</span>
+		{% endfor %}
+		<span class="vl"></span>
+		<span>Sort by</span>
+		<select id="sortBy" name="sortBy">
+		{% for criteria in ['id', 'name', 'department'] %}
+			<option value="{{ criteria }}" {% if request.args.get('sortBy')==criteria %} selected {% endif %}>
+				{{ criteria.title() }}
+			</option>
+		{% endfor %}
+		</select>	
+		<span>
+			<input type="checkbox" name='desc' {% if 'desc' in request.args %} checked {% endif %}>Descending
+		</span>
+		<span class="vl"></span>
+		<button>Search</button>
+	</span>
+	</form>
+	<a href='create'>
+		<button id="create">
+			<span class="center">+</span>
+		</button>
+	</a>
+</body>
+</html>

@@ -1,0 +1,101 @@
+* {
+	#border: 1px solid blue;
+	font-family: "Lucida Console", Courier, monospace;
+	box-sizing: border-box;
+	border-radius: 100vw;
+}
+html, body {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	background-color: lightgrey;
+	#background-image: linear-gradient(to bottom right, black, white);
+	background-attachment: fixed;
+	#background-color: lightgrey;
+}
+#content {
+	width: 75%;
+	height: 25vw;
+	background-color: white;
+	margin: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 100vw;	
+	display: flex;
+	border: 1px solid lightgrey;
+}
+.imgSpan {
+	width: 25vw;
+	height: 25vw;
+	position: relative;
+	text-align: center;
+}
+input, select {
+	outline: none;
+	background-color: white;
+	border: 2px solid lightgrey;
+	padding: 1%;
+}
+.imgSpan input {
+	position: absolute;
+	top: 101%;
+	left: 0; 
+	right: 0; 
+	margin-right: auto;
+	margin-left: auto;		
+	max-width: 100%;
+}
+img {
+	position: relative;
+	left: -1%;
+	border-radius: 50%;
+	width: 25vw;
+	height: 25vw;
+	object-fit: cover;
+}
+.descrb {
+	margin: auto;
+	font-size: 2vw;
+}
+.descrb * {
+	font-size: 2vw;
+}
+input[type="file"] {
+    display: none;
+}
+#submit {
+	position: absolute;
+	right: 1vw;
+	border-radius: 100vw;
+	top: 0; 
+	bottom: 0; 
+	margin-top: auto;
+	margin-bottom: auto;
+	height: 10vw;
+	width: 10vw;
+}
+#return {
+	position: fixed;
+	left: 0;
+	top: 0;
+	border-radius: 50%;
+	font-size: 50px;
+	padding: 50px;
+	margin: 1%;
+	width: 25px;
+	height: 25px;
+	background-color: white;
+	#background-image: linear-gradient(to bottom right, grey, lightgrey);
+	color: lightgrey;
+	border: 2px solid lightgrey;
+	outline: none;
+}
+.center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

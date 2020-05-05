@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Assistant Manager</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="{{ url_for('static', filename='details.css') }}">
+</head>
+<body>
+<a href='/assistants'>
+	<button id="return">
+		<span class="center">&lt;</span>
+	</button>
+</a>
+<form id="form" method="post" enctype="multipart/form-data" action="../{{ assistant['id'] or '' }}"/>
+{% if _method %}
+<input type="hidden" name="_method" value="{{ _method }}" form="form"/>
+{% endif %}
+<div id="content">
+	<span class="imgSpan">
+		<img id="picture" 
+		{% if assistant['id'] %}
+		src="../..{{ url_for('uploaded_file', filename=assistant['id']) }}.jpg">
+		{% else %}			 
+		src="http://thispersondoesnotexist.com/image">
+		{% endif %}
+		<label for="pictureFile" class="custom-file-upload">
+			<i class="fa fa-cloud-upload"></i> Custom Upload
+		</label>
+		<input id="pictureFile" type="file" name="file" form="form" />
+	</span>
+	<span class="descrb">
+		Name and surname:<br>
+		<input type="text" value="{{ assistant['name'] or ''}}" name="name" form="form" required><br><br>
+		Department<br>
+		<select id="department" name="department" form="form">
+			 {% if assistant['department'] %}
+			 <option value="{{ assistant['department'] }}" selected>{{ assistant['department'] }}</option>
+			 {% else %}			 
+			 <option value="">Select department</option>
+			 {% endif %}
+			 {% for department in departments %}
+			 <option value="{{ department }}">{{ department }}</option>
+			 {% endfor %}
+		</select><br><br>
+		Job:<br>
+		<select id="job" name="job" form="form">
+			 {% if assistant['job'] %}
+			 <option value="{{ assistant['job'] }}" selected>{{ assistant['job'] }}</option>
+			 {% else %}			 
+			 <option value="">Select job</option>
+			 {% endif %}
+			 {% for job in jobs %}
+			 <option value="{{ job }}">{{ job }}</option>
+			 {% endfor %}
+		</select>
+	</span>
+	<input id="submit" type="submit" value="Submit" form="form" />
+</div>
+<script>
+document.getElementById('pictureFile').onchange = function (evt) {
+    var tgt = evt.target || window.event.srcElement,
+        files = tgt.files;
+    if (FileReader && files && files.length) {
+        var fr = new FileReader();
+        fr.onload = function () {
+            document.getElementById('picture').src = fr.result;
+        }
+        fr.readAsDataURL(files[0]);
+    }
+}
+</script>
+</body>
+</html>
